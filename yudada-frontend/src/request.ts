@@ -1,11 +1,18 @@
 import axios from "axios";
 import { Message } from "@arco-design/web-vue";
 
+// 是否是开发环境
+export const isDev = process.env.NODE_ENV === "development";
+
+// 创建 Axios 实例
 const myAxios = axios.create({
-  baseURL: "http://localhost:8101",
+  baseURL: isDev
+    ? "http://localhost:8101"
+    : "https://springboot-h9js-125096-8-1330542578.sh.run.tcloudbase.com",
   timeout: 60000,
   withCredentials: true,
 });
+
 
 // 全局请求拦截器
 myAxios.interceptors.request.use(
